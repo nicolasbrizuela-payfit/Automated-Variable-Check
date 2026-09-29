@@ -1,0 +1,57 @@
+Overview
+[Español](#que-hace)
+[English](#what-it-does)
+
+## Que hace?
+
+El punto de este programma es poder verificar que una actualizacion o configuracion de un CoCo esta completo y sirve de un extra chequeo para
+que un PB sepa que todo esta en orden antes de mandar a testiar o sacar a producion. Como lo hace:
+
+1. Recoge los variables necesarrio en una configuracion o actualizacion
+2. Busca el toggle del PB y chequea que el bloque de condicion esta completo
+3. Si esta completo lo marca completo y si no se marca incompleto 
+4. Esta informacion se pasa a un agente que entiende como se configura las variables y puede identificar possible errores
+
+## Que es un bloque completo?
+
+Un bloque esta completo si el absMonth en la condicion es igual al que empieza en CoCo. Es decir un bloque que dice **AbsMonth(Today()) == 141 o 01.003 == 141** pero el CoCo es para 142 no esta completo. Tambien puede ser que el **AbsMonth()/01.003** no este y tambien esta incompleto. Un bloque completo se veria asi:
+```json
+"condition": "00.050 AND AbsMonth(Today()) == 142"
+```
+
+## Que falta para hacer
+- [ ] Armar sistema de busqueda de bloques para revisar
+- [ ] Encontrar manera de hacer revision masiva de variables
+- [ ] Servir informacion a un agente que entiende la funcion de variables
+
+
+
+
+
+## What it does
+
+The purpose of this program is to verify that a CoCo update or configuration is complete. It provides an additional check so that a PB can confirm everything is in order before sending it for testing or deploying it to production.
+
+It does this by:
+
+1. Collecting the variables required for a configuration or update
+2. Finding the PB toggle and checking whether the condition block is complete
+3. Marking the block as complete if it is valid, or incomplete if it is not
+4. Passing this information to an agent that understands how variables are configured and can identify possible errors
+
+## What is a complete block?
+
+A block is complete if the `absMonth` in its condition matches the month with which the CoCo starts. For example, a block containing `AbsMonth(Today()) == 141` or `01.003 == 141` is incomplete if the CoCo is for month `142`.
+
+A block is also incomplete if `AbsMonth()` or `01.003` is missing.
+
+A complete block would look like this:
+
+```json
+"condition": "00.050 AND AbsMonth(Today()) == 142"
+```
+
+## What remains to be done
+- [ ] Build a system for finding blocks to review
+- [ ] Find a way to review variables in bulk
+- [ ] Provide information to an agent that understands the purpose of variables
